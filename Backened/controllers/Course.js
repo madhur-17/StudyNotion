@@ -13,7 +13,7 @@ exports.createCourse = async (req, res) => {
 
         const userId = req.user.id;
         const instructorDetails = await User.findById(userId);
-        const tagDetails = await Tag.findById(tag);
+        const categoryDetails = await Category.findById(tag);
         const image = await imageUploader(thumbnail, process.env.FOLDER_NAME);
 
 
@@ -41,8 +41,8 @@ exports.createCourse = async (req, res) => {
         });
 
         //updationg tag schema
-        await Tag.findByIdAndUpdate({
-            _id: tagDetails._id
+        await Category.findByIdAndUpdate({
+            _id: categoryDetails._id
         },
             {
                 course: newCourse._id
