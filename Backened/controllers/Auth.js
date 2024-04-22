@@ -62,6 +62,7 @@ exports.signUp=async(req,res)=>{
                 email,
                 password,
                 confirmPassword,
+                otp
 
             }=req.body;
             if(!firstName||!lastName||!email||!password||!confirmPassword){
@@ -146,7 +147,7 @@ exports.signIn=async(req,res)=>{
             const payload={
                 email:user.email,
                 id:user._id,
-                role:user.accountType,
+                accountType:user.accountType,
             }
             const token=jwt.sign(payload,process.env.JWT_SECRET,{
                 expiresIn:"2h",
@@ -183,7 +184,6 @@ exports.signIn=async(req,res)=>{
     }
 }
 
-exports.change
-Password=async(req,res)=>{
+exports.changePassword=async(req,res)=>{
 
 }
