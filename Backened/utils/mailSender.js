@@ -5,7 +5,7 @@ const mailSender=async(email,title,body)=>{
     try{
         let transporter=nodemailer.createTransport({
             host:process.env.MAIL_HOST,
-            autj:{
+            auth:{
                 user:process.env.MAIL_USER,
                 pass:process.env.MAIL_PASS
             }
@@ -15,7 +15,7 @@ const mailSender=async(email,title,body)=>{
             from:"STUDYNOTION||by-Madhur",
             to:email,
             subject:title,
-            htmp:`<p>${body}</p>`
+            htmp:`${body}`
 
         })
 
