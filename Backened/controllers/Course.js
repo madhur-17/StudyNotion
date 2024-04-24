@@ -68,3 +68,27 @@ exports.showAllCourse=async(req,res)=>{
         data:allCourse
     })
 }
+
+exports.getAllDetails=async(req,res)=>{
+    const {course_id}=req.body;
+
+    const course=await Course.findById(course_id).populate({
+                                                            path:"instructor",
+                                                            populate:{
+                                                                path:"additionalDetails",
+                                                            },
+                                                        })
+                                                .populate("category")
+                                                .populate("ratingAndReview")
+                                                .populate({
+                                                    path:"courseContent",
+                                                    populate:{
+                                                            path:subSection
+                                                    }
+                                                })
+                                                .exec();
+
+    return res.json({
+        course:course
+    })                                                
+}

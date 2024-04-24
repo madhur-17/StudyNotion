@@ -32,3 +32,33 @@ exports.showAllCategory=async(req,res)=>{
         return res.status(500);
     }
 }
+
+
+exports.categoryPageDetails=async(req,res)=>{
+    try{
+        const {categoryId}=req.body;
+        //same category
+        const selected=await Category.findById(categoryId).populate("course").exec();
+        if(!payload)
+        {
+            return res.status(500);
+        }
+        //different catregory
+        const different=await Category.find({
+            _id:{$ne:categoryId}
+        }).populate("course").exec();
+
+        //get top selling course
+
+        return res.status(200).json({
+            selected,
+            different
+        })
+
+
+
+    }
+    catch(error){
+        return res.status(400);
+    }
+}
