@@ -1,5 +1,5 @@
 const nodemailer=require("nodemailer");
-process("dotenv").config();
+const path=require("path");
 
 const mailSender=async(email,title,body)=>{
     try{
@@ -12,10 +12,18 @@ const mailSender=async(email,title,body)=>{
         })
 
         let info=transporter.sendMail({
-            from:"STUDYNOTION||by-Madhur",
+            from:{
+                name:"StudyNotion",
+                address:process.env.MAIL_USER,
+            },
             to:email,
             subject:title,
-            htmp:`${body}`
+            htmp:`${body}`,
+            attachments:[{
+                filename:"StudyNotion",
+                path:path.join(__dirname,"Logo-Full-Light.png"),
+                contentType:'image/png'
+            }]
 
         })
 

@@ -1,6 +1,6 @@
 const Profile=require("../models/Profile");
 const User=require("../models/User");
-exports,updateProfile=async(req,res)=>{
+exports.updateProfile=async(req,res)=>{
     try{
         const {gender="",dateOfBirth="",contactNumber,about}=req.body;
         const user=User.findById(req.user.id);

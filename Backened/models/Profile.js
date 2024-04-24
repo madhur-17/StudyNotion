@@ -13,7 +13,7 @@ const profileSchema=new mongoose.Schema({
 
     },
     about:{
-        type:Stirng,
+        type:String,
         trim:true,
     }
 
