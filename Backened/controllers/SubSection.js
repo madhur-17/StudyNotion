@@ -5,7 +5,7 @@ const {videoUploader}=require("../utils/videoUploader");
 exports.createSubSection=async(req,res)=>{
     try{
         const {title,timeDuration,description,sectionid}=req.body;
-        const {videoFile}=req.file;
+        const {videoFile}=req.files;
 
         const videoDetails=await videoUploader(videoFile,process.env.FOLDER_NAME);
 

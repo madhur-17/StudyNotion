@@ -1,5 +1,6 @@
 const mongoose=require("mongoose");
 const mailSender=require("../utils/mailSender");
+const otpTemplate=require("../mail_format/templates/emailVerificationTemplate");
 
 const otpSchema=new mongoose.Schema({
     email:{
@@ -20,7 +21,9 @@ const otpSchema=new mongoose.Schema({
 
 const sendEmailVerification=async(email,otp)=>{
     try{
-        const mailresponse=await mailSender(email,"Verficitation Email",otp);
+        
+        const mailresponse=await mailSender(email,"Verficitation Email",otpTemplate(otp));
+       
     }
     catch(error){
         console.log(error);
@@ -28,8 +31,11 @@ const sendEmailVerification=async(email,otp)=>{
 }
 
 
-otpSchema.pre("sava",async(next)=>{
-    await sendEmailVerification(this.email,this.otp);
+otpSchema.pre("save",async function(next){     // async(next)=>{}  ->never use this arrow function when using this
+ 
+    if (this.isNew) {
+		await sendEmailVerification(this.email, this.otp);
+	}
     next();
 })
 

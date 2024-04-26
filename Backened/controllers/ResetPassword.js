@@ -52,20 +52,20 @@ exports.resetPassword = async (req, res) => {
     if (password != confirmPassword) {
       return res.json({
         success: false,
-        message: "Error in reset password",
+        message: "password do not match",
       });
     }
     const user = await User.findOne({ token });
     if (!user) {
       return res.json({
         success: false,
-        message: "Error in reset password",
+        message: "user not exist",
       });
     }
     if (user.resetPasswordExpires < Date.now()) {
       return res.json({
         success: false,
-        message: "Error in reset password",
+        message: "token expired",
       });
     }
 
@@ -80,7 +80,7 @@ exports.resetPassword = async (req, res) => {
       }
     );
     return res.json({
-        success:truer,
+        success:true,
         message:"reset password"
     })
   } catch (error) {

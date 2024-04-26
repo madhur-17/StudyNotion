@@ -3,6 +3,7 @@ const Otp=require("../models/Otp");
 const otpgenerator=require("otp-generator");
 const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
+const Profile=require("../models/Profile");
 
 exports.sendOtp=async(req,res)=>{
     try{
@@ -20,7 +21,7 @@ exports.sendOtp=async(req,res)=>{
         upperCaseAlphabets:false,
         specialChars:false,
     });
-
+  
     let result=await Otp.findOne({otp});
     while(result){
         otp=otpgenerator.generate(6,{
@@ -32,11 +33,13 @@ exports.sendOtp=async(req,res)=>{
     }
 
     const otpPayLoad={email,otp};
+   
     const otpBody=await Otp.create(otpPayLoad);
     
 
     res.status(200).json({
-        message:"Otp send"
+        message:"Otp send",
+        otp:otp,
     });
 
 
@@ -62,7 +65,9 @@ exports.signUp=async(req,res)=>{
                 email,
                 password,
                 confirmPassword,
-                otp
+                otp,
+                accountType,
+                contactNumber,
 
             }=req.body;
             if(!firstName||!lastName||!email||!password||!confirmPassword){
@@ -90,21 +95,23 @@ exports.signUp=async(req,res)=>{
                     message:"otp not found",
                 })
             }
-            if(otp!=recentotp.otp){
-                return res.status(400).jsin({
+            
+            if(otp!=recentotp[0].otp){
+                return res.status(400).json({
                     success:false,
                     message:"enter correct otp",
                 })
             }
-
+            
             const profileDetail=await Profile.create({
                 gender:null,
                 dateOfBirth:null,
-                contactNumber:null,
+                contactNumber:contactNumber,
                 about:null
             })
-    
+          
             const hashPassword=await bcrypt.hash(password,10);
+           
             const user=await User.create({
                 firstName,
                 lastName,
@@ -116,9 +123,11 @@ exports.signUp=async(req,res)=>{
 
                
             })
-            return res.status(200).json({
+           
+            return res.json({
                 success:true,
                 message:"Sign up Succesfull",
+                user,
             })
 
     }
@@ -158,7 +167,7 @@ exports.signIn=async(req,res)=>{
                 expires: new Date(Date.now()+3*24*60*60*100),
                 httpOnly:true,
             }
-            res.cookie("token",token,options).status(200).josn({
+            res.cookie("token",token,options).status(200).json({
                 success:true,
                 token,
                 user,

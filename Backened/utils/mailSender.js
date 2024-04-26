@@ -16,14 +16,10 @@ const mailSender=async(email,title,body)=>{
                 name:"StudyNotion",
                 address:process.env.MAIL_USER,
             },
-            to:email,
-            subject:title,
-            htmp:`${body}`,
-            attachments:[{
-                filename:"StudyNotion",
-                path:path.join(__dirname,"Logo-Full-Light.png"),
-                contentType:'image/png'
-            }]
+            to:`${email}`,
+            subject:`${title}`,
+            html:`${body}`,
+            
 
         })
 

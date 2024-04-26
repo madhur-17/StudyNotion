@@ -9,6 +9,16 @@ exports.createCategory=async(req,res)=>{
                     message:"Enter the proper details"  
                 })
             }
+            const category=await Category.findOne({name:name});
+            console.log(13);
+            if(category){
+                return res.status(500).json({
+                    success:false,
+                    messgae:"Category Already Exist",
+
+                });
+            }
+            console.log(21);
             await Category.create({name,description})
             return res.status(200).json({
                 success:true,
@@ -23,7 +33,7 @@ exports.createCategory=async(req,res)=>{
 
 exports.showAllCategory=async(req,res)=>{
     try{
-            const allTags=await Category.find({},{name:true,decription:true}); // name and description should be present
+            const allTags=await Category.find({},{name:true,description:true}); // name and description should be present
             return res.status(200).json({
                 Category:allTags
             })

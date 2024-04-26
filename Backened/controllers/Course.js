@@ -8,27 +8,26 @@ const imageUploader = require("../utils/imageUploader");
 
 exports.createCourse = async (req, res) => {
     try {
-        const { courseName, courseDescription, whatYouWillLearn, price, tag } = req.body;
+        const { courseName, courseDescription, whatYouWillLearn, price, tag,category } = req.body;
         const thumbnail = req.files.thumbnail;
 
         const userId = req.user.id;
         const instructorDetails = await User.findById(userId);
-        const categoryDetails = await Category.findById(tag);
+        const categoryDetails = await Category.findOne({name:category});
         const image = await imageUploader(thumbnail, process.env.FOLDER_NAME);
 
-
-        const newCourse = await Course.create({
+               const newCourse = await Course.create({
             courseName,
             courseDescription,
             instructor: instructorDetails._id,
             whatYouWillLearn,
-
+            tag,
             price,
             thumbnail: image.secure_url,
-            tag: tagDetails._id,
+            category: categoryDetails._id,
 
         })
-
+       
         //updating user schema
         await User.findByIdAndUpdate({
             _id: instructorDetails._id
@@ -39,7 +38,7 @@ exports.createCourse = async (req, res) => {
         }, {
             new: true
         });
-
+       
         //updationg tag schema
         await Category.findByIdAndUpdate({
             _id: categoryDetails._id
@@ -48,11 +47,11 @@ exports.createCourse = async (req, res) => {
                 course: newCourse._id
             }, { new: true });
 
-
+            
             return res.status(200).json({
-                message:"Course Cretedx"
+                message:"Course Creted"
             })
-
+            
     }
     catch (error) {
         return res.json({
