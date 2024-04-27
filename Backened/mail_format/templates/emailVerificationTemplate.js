@@ -1,3 +1,4 @@
+require("dotenv").config();
 const otpTemplate = (otp) => {
 	return `<!DOCTYPE html>
 	<html>
@@ -78,7 +79,7 @@ const otpTemplate = (otp) => {
 				Once your account is verified, you will have access to our platform and its features.</p>
 			</div>
 			<div class="support">If you have any questions or need assistance, please feel free to reach out to us at <a
-					href="mailto:madhurag1702@gmail.com">info@studynotion.com</a>. We are here to help!</div>
+					href="mailto:"${process.env.MAIL_USER}>info@studynotion.com</a>. We are here to help!</div>
 		</div>
 	</body>
 	
