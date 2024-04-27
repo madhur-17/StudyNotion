@@ -1,0 +1,20 @@
+{
+  "name": "studynotion",
+  "version": "1.0.0",
+  "description": "STUDY NOTION",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server":"cd Backened && npm run dev",
+    "client":"cd Frontened && npm run dev",
+    "dev":"concurrently -n \" client,server\" -c \"bgBlue,bgYellow\"\"npm run client\" \"npm run server\""
+          
+
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
