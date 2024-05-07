@@ -11,7 +11,8 @@ exports.resetPasswordToken = async (req, res) => {
         message: "Please enter email",
       });
     }
-    const user = User.findOne({ email });
+    const user = await User.findOne({ email:email });
+ 
     if (!user) {
       return res.status(500).json({
         success: false,
@@ -31,7 +32,7 @@ exports.resetPasswordToken = async (req, res) => {
       }
     );
 
-    const url = `http://localhost:3000/update-password/${token}`;
+    const url = `http://localhost:5173/update-password/${token}`;
 
     await mailSender(email, "Password Reset Link", `${url}`);
     return res.json({
