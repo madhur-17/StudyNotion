@@ -123,7 +123,7 @@ exports.signUp=async(req,res)=>{
                 image:`https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`
 
                
-            })
+            },{new:true}).populate("additionalDetails").exec()
            
             return res.json({
                 success:true,
@@ -151,7 +151,7 @@ exports.signIn=async(req,res)=>{
                 message:"Enter correct Details"
             })
         }
-        const user=await User.findOne({email});
+        const user=await User.findOne({email}).populate("additionalDetails").exec();
         if(await bcrypt.compare(password,user.password))
         {
             const payload={
