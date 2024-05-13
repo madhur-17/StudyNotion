@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
+import {useDispatch} from "react-redux";
+import { signin } from "../../../services/operations/authApi";
 
 function SigninForm() {
   const nav = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formdata, setFormData] = useState({ email: "", password: "" });
+  const dispatch = useDispatch()
   const changehandler = (e) => {
     setFormData((prev) => ({  
       ...prev,
@@ -15,10 +18,7 @@ function SigninForm() {
   };
   const submithandler = (event) => {
     event.preventDefault();
-
-    
-    toast.success("Accounut created");
-    nav("/dashboard");
+    dispatch(signin(formdata.email,formdata.password,nav));
   };
   return (
     <form

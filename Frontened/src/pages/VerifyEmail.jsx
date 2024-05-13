@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Spinner from '../components/common/Spinner';
 import OTPInput from "react-otp-input";
 import { Link, useNavigate } from 'react-router-dom';
 import { setLoading } from '../slice/authSlice';
+import {signup,sendotp} from "../services/operations/authApi"
 
 function VerifyEmail() {
     const navigate=useNavigate();
@@ -22,30 +23,29 @@ function VerifyEmail() {
         const {
             accountType,
             firstName,
-            lastName,email,password,confirmpassword
+            lastName,email,password,confirmPassword
         }=signupData;
-        dispatch(signup(  accountType,firstName,lastName,email,password,confirmpassword,otp,navigate));
+        dispatch(signup(accountType,firstName,lastName,email,password,confirmPassword,otp,navigate));
     }
   return (
-    <div>
+    <div className='text-yellow-200'>
       {
         loading?<div><Spinner/></div>:(
             <div>
                 <h1> verify Email</h1>
                 <p>A verification code has been sent to you.Enter the code below</p>
-                <fomr onSubmit={submitHandler} >
+                <form onSubmit={submitHandler} >
                     <OTPInput
                         value={otp}
                         onChange={setOtp}
                         numInputs={6}
-                        placeholder='-'
-                        renderSeparator={<span><t/></span>}
+                        renderSeparator={<span></span>}
                         renderInput={props=> <input {...props}/>}
                     />
                     <button type='submit'>
                         Verify Email
                     </button>
-                </fomr>
+                </form>
                 <div>
                     <Link to={"/signin"}>
                         <p>Back To Login</p>
@@ -64,15 +64,3 @@ function VerifyEmail() {
 
 export default VerifyEmail
 
-const {loading} =useSelector(state=>state.auth);
-const dispatch=useDispatch();{
-    loading?<div><Spinner/></div>:(
-        <div>
-            <h1> verify Email</h1>
-            <p>A verification code has been sent to you.Enter the code below</p>
-            <fomr>
-
-            </fomr>
-        </div>
-    )
-}

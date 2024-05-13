@@ -16,7 +16,7 @@ function NavBar() {
     try {
       const res = await apiConnector("GET", categories.ALL_CATEGORIES_API);
 
-      console.log(res.data.Category);
+      
       setSubLinks(res.data.Category);
     }
     catch (Error) {

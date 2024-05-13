@@ -8,5 +8,8 @@ export const categories={
 export const auth={
     RESET_PASSWORD_TOKEN:baseUrl+"/auth/reset-password-token",
     RESET_PASSWORD:baseUrl+"/auth/reset-password",
+    SEND_OTP:baseUrl+"/auth/sendotp",
+    SIGNUP:baseUrl+"/auth/signup",
+    SIGNIN:baseUrl+"/auth/signin",
 
 }

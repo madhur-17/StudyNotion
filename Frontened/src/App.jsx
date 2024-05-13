@@ -7,6 +7,11 @@ import SignUp from './pages/SignUp'
 import Resetpassword from './pages/Resetpassword'
 import UpdatePassword from './pages/UpdatePassword'
 import About from './pages/About'
+import DashBoard from './pages/DashBoard'
+import MyProfile from './components/core/DashBoard/MyProfile'
+import VerifyEmail from './pages/VerifyEmail'
+import PrivateRoute from './components/core/Auth/PrivateRoute'
+import Error from './pages/Error'
 
 function App() {
   return (
@@ -19,6 +24,29 @@ function App() {
       <Route path="/resetpassword" element={<Resetpassword/>}></Route>
       <Route path="/update-password/:id" element={<UpdatePassword/>}></Route>
       <Route path='/aboutus' element={<About/>}></Route>
+      <Route path='/verify-email' element={<VerifyEmail/>}></Route>
+      
+
+
+      <Route element={
+               <PrivateRoute>
+               <DashBoard/>
+               </PrivateRoute>} 
+               path='/dashboard'>
+              <Route path="/dashboard/my-profile" element={<MyProfile />} /> 
+      
+      </Route>
+    
+
+    <Route path='*' element={<Error/>}></Route>
+
+
+
+
+
+
+
+
      </Routes>
    
     </div>

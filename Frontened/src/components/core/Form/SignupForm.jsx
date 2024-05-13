@@ -2,17 +2,23 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import {ACCOUNT_TYPE} from "../../../utils/constants";
+import { useDispatch } from "react-redux";
+import { setSignupData } from "../../../slice/authSlice";
+import { sendotp } from "../../../services/operations/authApi";
 
 function SignupForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [student,setStudent]=useState("student");
+  const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT)
   const nav = useNavigate();
+  const dispatch=useDispatch();
   const [formdata, setFormdata] = useState({
-    firstname: "",
-    lastname: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
-    confirmpassword: "",
+    confirmPassword: "",
   });
   const changehandler = (e) => {
     setFormdata((prev) => ({
@@ -20,13 +26,31 @@ function SignupForm() {
       [e.target.name]: e.target.value,
     }));
   };
-  const submithandler = (event) => {
-    event.preventDefault();
+  const submithandler = (e) => {
+    e.preventDefault()
 
-   
-    toast.success("Accounut created");
-    nav("/dashboard");
-  };
+    if (formdata.password != formdata.confirmPassword) {
+      toast.error("Passwords Do Not Match")
+      return
+    }
+    const signupData = {
+      ...formdata,
+      accountType,
+    }
+    console.log(signupData);
+    dispatch(setSignupData(signupData))
+    dispatch(sendotp(formdata.email, nav))
+
+    // Reset
+    setFormdata({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    })
+    setAccountType(ACCOUNT_TYPE.STUDENT)
+  }
   return (
     <div className="flex flex-col">
       <div className="flex bg-gray-800 max-w-max rounded-full p-1 gap-x-2 mt-3">
@@ -53,9 +77,9 @@ function SignupForm() {
             <input
               required
               type="text"
-              name="firstname"
-              value={formdata.firstname}
-              placeholder="First Name"
+              name="firstName"
+              value={formdata.firstName}
+              placeholder="madhur"
               onChange={changehandler}
               className="w-full rounded-[.5rem] p-2 leading-3 mt-1  bg-gray-800"
             />
@@ -67,9 +91,9 @@ function SignupForm() {
             <input
               required
               type="text"
-              name="lastname"
-              value={formdata.lastname}
-              placeholder="First Name"
+              name="lastName"
+              value={formdata.lastName}
+              placeholder="agrawal"
               onChange={changehandler}
               className="w-full rounded-[.5rem] p-2 leading-3 mt-1  bg-gray-800"
             />
@@ -118,8 +142,8 @@ function SignupForm() {
             <input
               required
               type={showPassword ?"text":"password"}
-              value={formdata.confirmpassword}
-              name="confirmpassword"
+              value={formdata.confirmPassword}
+              name="confirmPassword"
               onChange={changehandler}
               placeholder="******"
               className="w-full rounded-[.5rem] p-2 leading-3 mt-1  bg-gray-800"
@@ -131,7 +155,8 @@ function SignupForm() {
         </span>
           </label>
         </div>
-        <button className="mt-9 w-full flex items-center justify-center bg-yellow-200  py-2 border border-black rounded-full font-semibold">
+        <button className="mt-9 w-full flex items-center justify-center bg-yellow-200  py-2 border
+         border-black rounded-full font-semibold" type="submit">
           Submit
         </button>
       </form>
