@@ -12,8 +12,14 @@ import MyProfile from './components/core/DashBoard/MyProfile'
 import VerifyEmail from './pages/VerifyEmail'
 import PrivateRoute from './components/core/Auth/PrivateRoute'
 import Error from './pages/Error'
+import EnrolledCourses from './components/core/DashBoard/EnrolledCourses'
+import { useSelector } from 'react-redux'
+import { ACCOUNT_TYPE } from './utils/constants'
+import AddCourse from './components/core/DashBoard/AddCourse'
+
 
 function App() {
+  const {user}=useSelector(state=>state.profile);
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
     <NavBar/>
@@ -34,6 +40,10 @@ function App() {
                </PrivateRoute>} 
                path='/dashboard'>
               <Route path="/dashboard/my-profile" element={<MyProfile />} /> 
+              {user?.accountType==ACCOUNT_TYPE.STUDENT&&<Route path="/dashboard/enrolled-courses" element={<EnrolledCourses/>}/>}
+              {user?.accountType==ACCOUNT_TYPE.INSTRUCTOR&&<Route path="/dashboard/add-course" element={<AddCourse/>}/>}
+              
+
       
       </Route>
     

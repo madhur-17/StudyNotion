@@ -23,11 +23,11 @@ function MyProfile() {
         <div>
             <p> About</p>
             <button onClick={()=>navigate("/dashboard/settings")}>Edit</button>
-            {console.log(user)}
+            
             <p>{user.user.additionalDetails.about}</p>
         </div>
         <div>
-            <h>Personal Details</h>
+            <h1>Personal Details</h1>
             <button onClick={()=>navigate("/dashboard/settings")}>Edit</button>
             <div>
                 <div>

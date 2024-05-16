@@ -20,7 +20,7 @@ function SideBar() {
         return <Spinner/>
     }
   return (
-    <div className='flex min-w-[222px] flex-col border-r-[2px] border-r-yellow-300 
+    <div className='flex min-w-[252px] flex-col border-r-[2px] border-r-yellow-300 
                      h-[calc(100vh-3.5rem)] bg-richblack-800 py-10'>
       <div className='flex flex-col'>
       {
@@ -45,8 +45,8 @@ function SideBar() {
           handlebtn2:()=>(setConfirmationMoal(null)),
          })}
          >
-            <div className='flex '>
-              <VscSignOut/>
+            <div className='flex p-4 gap-3'>
+              <VscSignOut style={{fontSize:"24px"}}/>
               <p>logout</p>
             </div>
 

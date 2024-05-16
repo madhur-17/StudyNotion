@@ -9,7 +9,6 @@ import { sendotp } from "../../../services/operations/authApi";
 
 function SignupForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const [student,setStudent]=useState("student");
   const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT)
   const nav = useNavigate();
   const dispatch=useDispatch();
@@ -53,20 +52,20 @@ function SignupForm() {
   }
   return (
     <div className="flex flex-col">
-      <div className="flex bg-gray-800 max-w-max rounded-full p-1 gap-x-2 mt-3">
-        <button onClick={()=>setStudent("student")} 
-        className={`${student === "student"
+      <div className="flex bg-gray-800 max-w-max rounded-full p-1 gap-x-2 mt-3 border-[2px] border-richblack-400">
+        <button onClick={()=>setAccountType("Student")} 
+        className={`${accountType === "Student"
             ?
-            "bg-gray-500 text-white"
-            : "bg-transparent text-black"} py-2 px-5 rounded-full transition-all duration-200`}
+            "bg-richblack-600 text-white"
+            : "bg-transparent text-richblack-400"} py-2 px-5 rounded-full transition-all duration-200`}
         
         >Student</button>
         <button 
-        className={`${student === "mentor"
+        className={`${accountType === "Instructor"
             ?
-            "bg-gray-500 text-white"
-            : "bg-transparent text-black"} py-2 px-5 rounded-full transition-all duration-200`}
-        onClick={()=>setStudent("mentor")}>Mentor</button>
+            "bg-richblack-600 text-white"
+            : "bg-transparent text-richblack-400"} py-2 px-5 rounded-full transition-all duration-200`}
+        onClick={()=>setAccountType("Instructor")}>Instructor</button>
       </div>
       <form onSubmit={submithandler}>
         <div className="flex gap-x-2 mt-3">
