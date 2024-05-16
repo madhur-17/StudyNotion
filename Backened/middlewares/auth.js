@@ -7,7 +7,7 @@ exports.auth=async(req,res,next)=>{
         if(!token){
             return res.json({
                 success:false,
-                message:"Eror in validation"
+                message:"Eror in validation token not exist"
             })
         }
         try{
@@ -17,7 +17,7 @@ exports.auth=async(req,res,next)=>{
         catch(error){
             return res.json({
                 success:false,
-                message:"Eror in validation"
+                message:"Eror in validation decoding"
             })
         }
         next();
@@ -26,7 +26,7 @@ exports.auth=async(req,res,next)=>{
         console.error(err);
         return res.json({
             success:false,
-            message:"Eror in validation"
+            message:"Eror in validation catch block"
         })
     }
 }
@@ -46,6 +46,7 @@ exports.isStudent=async(req,res,next)=>{
         console.error(error);
          return res.statue(400);
      }
+     
 }
 exports.isInstructor=async(req,res,next)=>{
     try{

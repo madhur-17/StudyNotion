@@ -8,7 +8,7 @@ const router = express.Router()
 const {
   createCourse,
   showAllCourse,
-  
+  editCourse
 } = require("../controllers/Course")
 
 
@@ -58,6 +58,9 @@ router.post("/addSubSection", auth, isInstructor, createSubSection)
 // Get all Registered Courses
 router.get("/getAllCourses", showAllCourse)
 // Get Details for a Specific Courses
+
+router.post("/editCourse", auth, isInstructor, editCourse)
+
 
 
 

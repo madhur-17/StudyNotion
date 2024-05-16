@@ -65,3 +65,26 @@ exports.getAllUsersDetails=async(req,res)=>{
         details,
     })
 }
+
+exports.getAllEnrolledCorses=async(req,res)=>{
+    
+    try{
+        const userid=req.user.id;
+        const user=await User.findById(userid).populate("course").exec();
+        if(!user){
+            return res.json({
+                success:false,
+                message:"Could not find any user"
+            })
+        }
+        
+        return res.status(200).json({
+            success:true,
+            message:"response madhur",
+            data:user.course,
+        })
+    }
+    catch(error){
+        console.log(error);
+    }
+}

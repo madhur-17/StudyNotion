@@ -30,6 +30,9 @@ const courseSchame=new mongoose.Schema({
     thumbnail:{
         type:String
     },
+    instructions:{
+        type:[String]
+    },
     tag:{
         type:[String],
        
@@ -42,7 +45,15 @@ const courseSchame=new mongoose.Schema({
     studentsEnrolled:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User"
-    }]
+    }],
+    status:{
+        type:"String",
+        enum:["Draft","Published"]
+    },
+    createdAt:{
+        type:Date,
+        default:Date.now,
+    }
 });
 
 module.exports=mongoose.model("Course",courseSchame);
