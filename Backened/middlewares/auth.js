@@ -3,7 +3,17 @@ require("dotenv").config();
 
 exports.auth=async(req,res,next)=>{
     try{
-        const token=req.cookies.token || req.header("Authroziation").replace("Bearer ","");
+        //console.log(req.headers);
+       console.log(req.header("Authorization"));
+       // console.log(7);
+       // const token = req?.cookies?.token || 
+        //(req.header("Authorization") ? req.header("Authorization").replace("Bearer ", "") : undefined);
+        const token =
+			req.cookies.token ||
+			req.body.token ||
+			req.header('Authorization')?.replace("Bearer ", "");
+          // console.log(token);
+        
         if(!token){
             return res.json({
                 success:false,
@@ -17,7 +27,7 @@ exports.auth=async(req,res,next)=>{
         catch(error){
             return res.json({
                 success:false,
-                message:"Eror in validation decoding"
+                message:error.message
             })
         }
         next();
@@ -26,7 +36,7 @@ exports.auth=async(req,res,next)=>{
         console.error(err);
         return res.json({
             success:false,
-            message:"Eror in validation catch block"
+            message:err.message
         })
     }
 }

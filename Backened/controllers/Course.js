@@ -8,7 +8,7 @@ const imageUploader = require("../utils/imageUploader");
 
 exports.createCourse = async (req, res) => {
     try {
-        const { courseName, courseDescription, whatYouWillLearn, price, tag:_tag,category,status,instructions: _instructions,} = req.body;
+        const { courseName, courseDescription, whatYouWillLearn,thumbnail, price, tag:_tag,category,status,instructions: _instructions,} = req.body;
         //const thumbnail = req.files.thumbnail;
 
         const userId = req.user.id;
@@ -34,7 +34,7 @@ exports.createCourse = async (req, res) => {
             whatYouWillLearn,
             tag,
             price,
-            thumbnail: "https://google.com",
+            thumbnail,
             category: categoryDetails._id,
             status: status,
             instructions,
@@ -139,7 +139,7 @@ exports.editCourse = async (req, res) => {
       res.status(500).json({
         success: false,
         message: "Internal server error",
-        error: error.message,
+       
       })
     }
 }

@@ -29,7 +29,8 @@ const {
 // Sub-Sections Controllers Import
 const {
   createSubSection,
-
+  deleteSubSection,
+  updateSubSection
 } = require("../controllers/Subsection")
 
 // Rating Controllers Import
@@ -55,6 +56,7 @@ router.post("/deleteSection", auth, isInstructor, deleteSection)
 // Edit Sub Section
 
 router.post("/addSubSection", auth, isInstructor, createSubSection)
+router.post("/deleteSubSection",auth,isInstructor,deleteSubSection);
 // Get all Registered Courses
 router.get("/getAllCourses", showAllCourse)
 // Get Details for a Specific Courses
