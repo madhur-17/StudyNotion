@@ -25,5 +25,16 @@ export const profile_endpoints={
 export const course_endpoints={
     CREATE_COURSE:baseUrl+"/course/createCourse",
     EDIT_COURSE:baseUrl+"/course/editCourse",
-    
+}
+
+export const section_endpoints={
+    CREATE_SECTION:baseUrl+"/course/addSection",
+    EDIT_SECTION:baseUrl+"/course/updateSection",
+    DELETE_SECTION:baseUrl+"/course/deleteSection"
+}
+
+export const subSection_endpoints={
+    CREATE_SUBSECTION:baseUrl+"/course/addSubSection",
+    DELETE_SUBSECTION:baseUrl+"/course/deleteSubSection",
+    UPDATE_SUBSECTION:baseUrl+"/course/updateSubSection"
 }

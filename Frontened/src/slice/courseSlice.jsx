@@ -18,6 +18,7 @@ export const courseSlice=createSlice({
             state.step=action.payload
         },
         setCourse(state,action){
+            console.log(21);
             state.course=action.payload
         },
         setEditCourse(state,action){

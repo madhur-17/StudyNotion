@@ -6,6 +6,7 @@ import ReqirementsForm from './ReqirementsForm';
 import { setStep,setCourse } from '../../../../../slice/courseSlice';
 import {COURSE_STATUS} from "../../../../../utils/constants";
 import ChipInput from './ChipInput';
+import Upload from '../Upload';
 function CourseINformationForm() {
     const {
         register,
@@ -126,6 +127,7 @@ function CourseINformationForm() {
     formData.append("instructions", JSON.stringify(data.courseRequirements))
     formData.append("thumbnailImage", data.courseImage)
     setLoading(true)
+    
     const result = await addCourseDetails(formData, token)
     if (result) {
       dispatch(setStep(2))
@@ -202,6 +204,14 @@ function CourseINformationForm() {
                 setValue={setValue}
                 getValues={getValues}
             />
+            <Upload
+                name="courseImage"
+                label="Course Thumbnail"
+                register={register}
+                setValue={setValue}
+                errors={errors}
+                editData={editCourse ? course?.thumbnail : null}
+             />
             <label>
                 <p>Course Benefits<sup>*</sup></p>
                 <textarea
