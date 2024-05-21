@@ -23,16 +23,17 @@ function NestedView({ handleChangeEditSectionName }) {
   
 
   const handleDeleteSection=async(sectionId,courseId,token)=>{
+    
     const res=await deleteSection({ sectionId, courseId},token )
     dispatch(setCourse(res))
       setConfirmationModal(null)
   }
   const handleDeleteSubSection=async(subSectionId,sectionId)=>{
     const res=await deleteSubSection({subSectionId,sectionId},token);
-    if(result){
+    if(res){
       const updatedCourseContent=course.courseContent.map(ele=> ele._id==sectionId?res:ele);
       const updatedCourse={...course, courseContent:updatedCourseContent}
-      dispatch(setCourse(res));
+      dispatch(setCourse(updatedCourse));
     }
     setConfirmationModal(null);
   }
@@ -57,7 +58,7 @@ function NestedView({ handleChangeEditSectionName }) {
                   text2: "All lectures in this section will be deleated",
                   textbtn1: "Delete",
                   textbtn2: "Cancel",
-                  handlebtn1: () =>  handleDeleteSection({ sectionId: ele._id, courseId: course._id,token }),
+                  handlebtn1: () =>  handleDeleteSection( ele._id, course._id,token ),
                   handlebtn2: () => (setConfirmationModal(null)),
                 })}><TbHttpDelete /></button>
               </div>
@@ -67,15 +68,15 @@ function NestedView({ handleChangeEditSectionName }) {
             <div>
               {
                 ele.subSection.map((data) => (
-                  <div key={data._id}
+                  <div key={data._id} className='flex flex-row gap-x-2'
                     onClick={() => setViewSubSection(data)}
                   >
-                    <div>
+                    <div className='flex gap-x-2'>
                       <RxDropdownMenu />
-                      <p>{data.title}</p>
+                      <p>{data.title} </p>
 
                     </div>
-                    <div>
+                    <div onClick={(e)=>e.stopPropagation()}>
                       <button type='button' onClick={() => setEditSubSection({ ...data, sectionId: ele._id })}><FaEdit /></button>
                       <button type='button' onClick={() => setConfirmationModal({
                         text1: "Delete this SubSection",

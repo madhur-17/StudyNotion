@@ -7,6 +7,7 @@ import { setStep,setCourse } from '../../../../../slice/courseSlice';
 import {COURSE_STATUS} from "../../../../../utils/constants";
 import ChipInput from './ChipInput';
 import Upload from '../Upload';
+import {toast} from "react-hot-toast"
 function CourseINformationForm() {
     const {
         register,
@@ -42,6 +43,7 @@ function CourseINformationForm() {
             setValue("courseBenefits",course.whatYouWillLearn);
             setValue("courseImage",course.thumbnail);
             setValue("courseRequirements",course.instructions);
+        
         }
     },[])
 
@@ -100,7 +102,7 @@ function CourseINformationForm() {
           )
         }
         if (currentValues.courseImage !== course.thumbnail) {
-          formData.append("thumbnailImage", data.courseImage)
+          formData.append("thumbnail", data.courseImage)
         }
         
         setLoading(true)
@@ -125,7 +127,9 @@ function CourseINformationForm() {
     formData.append("category", data.courseCategory)
     formData.append("status", COURSE_STATUS.DRAFT)
     formData.append("instructions", JSON.stringify(data.courseRequirements))
-    formData.append("thumbnailImage", data.courseImage)
+    formData.append("thumbnail", data.courseImage)
+
+    console.log(data.courseImage);
     setLoading(true)
     
     const result = await addCourseDetails(formData, token)

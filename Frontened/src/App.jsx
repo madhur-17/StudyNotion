@@ -16,6 +16,8 @@ import EnrolledCourses from './components/core/DashBoard/EnrolledCourses'
 import { useSelector } from 'react-redux'
 import { ACCOUNT_TYPE } from './utils/constants'
 import AddCourse from './components/core/DashBoard/AddCourse'
+import MyCourses from './components/core/DashBoard/MyCourses'
+import EditCourse from "./components/core/DashBoard/EditCourse"
 
 
 function App() {
@@ -40,10 +42,21 @@ function App() {
                </PrivateRoute>} 
                path='/dashboard'>
               <Route path="/dashboard/my-profile" element={<MyProfile />} /> 
-              {user?.accountType==ACCOUNT_TYPE.STUDENT&&<Route path="/dashboard/enrolled-courses" element={<EnrolledCourses/>}/>}
-              {user?.accountType==ACCOUNT_TYPE.INSTRUCTOR&&<Route path="/dashboard/add-course" element={<AddCourse/>}/>}
-              
 
+              
+              {user?.accountType==ACCOUNT_TYPE.STUDENT&&
+              <>
+              <Route path="/dashboard/enrolled-courses" element={<EnrolledCourses/>}/>
+              </>
+              }
+              {user?.accountType==ACCOUNT_TYPE.INSTRUCTOR&&
+              <>
+              <Route path='/dashboard/my-courses' element={<MyCourses/>}/>
+              <Route path="/dashboard/add-course" element={<AddCourse/>}/>
+              <Route path='/dashboard/edit-course/:courseId' element={<EditCourse/>}/>
+              </>
+              }
+              
       
       </Route>
     

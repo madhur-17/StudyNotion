@@ -25,6 +25,9 @@ export const profile_endpoints={
 export const course_endpoints={
     CREATE_COURSE:baseUrl+"/course/createCourse",
     EDIT_COURSE:baseUrl+"/course/editCourse",
+    INSTRUCTOR_COURSES:baseUrl+"/course/getInstructorCourses",
+    DELETE_COURSE:baseUrl+"/course/deleteCourse",
+    COURSE_DETAILS:baseUrl+"/course/getAllDetailsOfCourse",
 }
 
 export const section_endpoints={

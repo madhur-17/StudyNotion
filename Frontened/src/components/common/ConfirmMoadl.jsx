@@ -2,7 +2,7 @@ import React from 'react'
 
 function ConfirmMoadl({modalData}) {
   return (
-    <div>
+    <div className='text-white'>
         <div>
             <p>{modalData.text1}</p>
             <p>{modalData.text2}</p>

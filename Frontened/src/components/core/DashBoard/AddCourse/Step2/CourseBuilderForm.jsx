@@ -39,7 +39,8 @@ function CourseBuilderForm() {
     setLoading(true);
     let result;
     if(editSection){
-      result=await updateSection({sectionName:data.sectionName,sectionId:editSection},token);
+      result=await updateSection({sectionName:data.sectionName,sectionId:editSection,courseId:course._id},token);
+      console.log(result);
     }
     else{
       
@@ -83,14 +84,14 @@ function CourseBuilderForm() {
           errors.setionName&&<span>Section Name is needed</span>
         }
         <div>
-          <button type='submit'>{editSection?"Edit Section Name":"Create Section"}</button>
+          <button type='submit' className='gap-x-3'>{editSection?"Edit Section Name":"Create Section"}</button>
           {editSection&&<button type='button' onClick={handleCancle}>Cancel Edit</button>}
         </div>
       </form>
         
       {
         
-      course.courseContent.length>0 &&(<NestedView handleChangeEditSectionName={handleChangeEditSectionName}/>)
+      course?.courseContent?.length>0 &&(<NestedView handleChangeEditSectionName={handleChangeEditSectionName}/>)
     }
 
     <div>
