@@ -28,7 +28,8 @@ const courseSchame=new mongoose.Schema({
         type:Number,
     },
     thumbnail:{
-        type:String
+        type:String,
+        required:true
     },
     instructions:{
         type:[String]

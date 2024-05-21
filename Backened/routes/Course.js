@@ -8,7 +8,11 @@ const router = express.Router()
 const {
   createCourse,
   showAllCourse,
-  editCourse
+  editCourse,
+  getInstructorCourses,
+  deleteCourse,
+  getAllDetails,
+  getFullCourseDetails
 } = require("../controllers/Course")
 
 
@@ -54,16 +58,19 @@ router.post("/updateSection", auth, isInstructor, updateSection)
 // Delete a Section
 router.post("/deleteSection", auth, isInstructor, deleteSection)
 // Edit Sub Section
+router.post("/getAllDetailsOfCourse",auth,isInstructor,getFullCourseDetails);
 
-router.post("/addSubSection", auth, isInstructor, createSubSection)
+router.post("/addSubSection", auth, isInstructor, createSubSection);
 router.post("/deleteSubSection",auth,isInstructor,deleteSubSection);
+router.post("/updateSubSection",auth,isInstructor,updateSubSection);
 // Get all Registered Courses
 router.get("/getAllCourses", showAllCourse)
 // Get Details for a Specific Courses
 
 router.post("/editCourse", auth, isInstructor, editCourse)
 
-
+router.get("/getInstructorCourses", auth, isInstructor, getInstructorCourses)
+router.delete("/deleteCourse", deleteCourse)
 
 
 // ********************************************************************************************************

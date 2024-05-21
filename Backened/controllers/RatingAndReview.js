@@ -1,4 +1,4 @@
-const { default: mongoose } = require("mongoose");
+const { mongoose } = require("mongoose");
 const RatingAndReview=require("../models/RatingAndReview");
 const Course=require("../models/Course.js");
 
