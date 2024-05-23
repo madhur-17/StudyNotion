@@ -58,8 +58,10 @@ exports.createCourse = async (req, res) => {
         await Category.findByIdAndUpdate({
             _id: categoryDetails._id
         },
-            {
+            { 
+              $push:{
                 course: newCourse._id
+            }
             }, { new: true });
 
             
@@ -215,6 +217,7 @@ exports.deleteCourse = async (req, res) => {
 
     // Find the course
     const course = await Course.findById(courseId)
+
     if (!course) {
       return res.status(404).json({ message: "Course not found" })
     }
@@ -242,10 +245,24 @@ exports.deleteCourse = async (req, res) => {
       // Delete the section
       await Section.findByIdAndDelete(sectionId)
     }
-
+     await Category.findByIdAndUpdate(course.category,{
+            $pull:{
+              course:courseId
+            }
+     })
     // Delete the course
+   
+   
+   
+   
+   
+   
     await Course.findByIdAndDelete(courseId)
 
+    
+    
+    
+    
     return res.status(200).json({
       success: true,
       message: "Course deleted successfully",
