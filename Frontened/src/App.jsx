@@ -18,6 +18,7 @@ import { ACCOUNT_TYPE } from './utils/constants'
 import AddCourse from './components/core/DashBoard/AddCourse'
 import MyCourses from './components/core/DashBoard/MyCourses'
 import EditCourse from "./components/core/DashBoard/EditCourse"
+import Catalog from './pages/Catalog'
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
       <Route path="/update-password/:id" element={<UpdatePassword/>}></Route>
       <Route path='/aboutus' element={<About/>}></Route>
       <Route path='/verify-email' element={<VerifyEmail/>}></Route>
+      <Route path='/catalog/:catalogName' element={<Catalog/>}></Route>
       
 
 

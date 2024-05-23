@@ -41,3 +41,7 @@ export const subSection_endpoints={
     DELETE_SUBSECTION:baseUrl+"/course/deleteSubSection",
     UPDATE_SUBSECTION:baseUrl+"/course/updateSubSection"
 }
+
+export const category_endpoints={
+    CATALOG_DATA:baseUrl+"/course/getCategoryPageDetails",
+}

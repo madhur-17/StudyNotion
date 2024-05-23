@@ -17,7 +17,8 @@ function NavBar() {
       const res = await apiConnector("GET", categories.ALL_CATEGORIES_API);
 
       
-      setSubLinks(res.data.Category);
+      setSubLinks(res.data.data);
+      
     }
     catch (Error) {
       console.log(Error);
@@ -67,8 +68,9 @@ function NavBar() {
                                 <ul className='text-center'>
                                   {subLink?.map((ele) => (
                                     
-                                    <li key={ele._id} onClick={() => navigate(`/${ele.name}`)}>
+                                    <li key={ele._id} onClick={() => navigate(`/catalog/${ele.name.split(" ").join("-").toLowerCase()}`)}>
                                       {ele.name}
+                                      
                                     </li>
                                  
                                   ))}
