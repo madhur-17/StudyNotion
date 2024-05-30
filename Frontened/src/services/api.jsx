@@ -45,3 +45,10 @@ export const subSection_endpoints={
 export const category_endpoints={
     CATALOG_DATA:baseUrl+"/course/getCategoryPageDetails",
 }
+
+
+export const payment_endpount = {
+    COURSE_PAYMENT_API: baseUrl + "/payment/capturePayment",
+    COURSE_VERIFY_API: baseUrl + "/payment/verifyPayment",
+    SEND_PAYMENT_SUCCESS_EMAIL_API: baseUrl + "/payment/sendPaymentSuccessEmail",
+  }

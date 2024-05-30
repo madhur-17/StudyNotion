@@ -9,8 +9,9 @@ function EnrolledCourses() {
     const [courses,setCourses]=useState(null);
     const getEnrolledCourses=async()=>{
         const res=await enrolledCourses(token);
-       // console.log(res);
+       // console.log(res)
         setCourses(res);
+        
     };
 
     useEffect(()=>{
@@ -23,18 +24,20 @@ function EnrolledCourses() {
         {
             !courses?(<Spinner/>):(!courses.length?<p>You are not Enrolled in any courses</p>:(
                 <div>
-                        <div>
+                        <div className='flex flex-row gap-x-5'>
                         <p>Course Name</p>
                         <p>Duration</p>
-                        <p>Orogress</p>
+                        <p>Progress</p>
                         </div>
                         {
-                            courses.map((ele,ind)=>{
+                            courses.map((ele,ind)=>(
+                               
+                                <div className='text-white flex flex-row py-3 px-6' key={ind}>
                                 <div>
-                                <div>
-                                <img src={ele.thumbnail}/>
+                                <img src={ele.thumbnail} alt='image' width={80} height={50}/>
                                 </div>
                                 <div>
+                                    
                                     <p>{ele.courseName}</p>
                                     <p>{ele.courseDescription}</p>
                                 </div>
@@ -43,7 +46,7 @@ function EnrolledCourses() {
                                 <ProgressBar completed={ele?.progress||0} customLabel='Not there Yet' height='8px'/>;
                                 </div>
                                 </div>
-                            })
+                            ))
                         }
                 </div>
             ))

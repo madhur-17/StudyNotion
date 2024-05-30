@@ -19,6 +19,7 @@ import AddCourse from './components/core/DashBoard/AddCourse'
 import MyCourses from './components/core/DashBoard/MyCourses'
 import EditCourse from "./components/core/DashBoard/EditCourse"
 import Catalog from './pages/Catalog'
+import CourseDetails from './pages/CourseDetails'
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
       <Route path='/aboutus' element={<About/>}></Route>
       <Route path='/verify-email' element={<VerifyEmail/>}></Route>
       <Route path='/catalog/:catalogName' element={<Catalog/>}></Route>
+      <Route path='/courses/:courseId' element={<CourseDetails/>}></Route>
       
 
 

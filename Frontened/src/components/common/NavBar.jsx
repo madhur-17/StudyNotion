@@ -97,7 +97,7 @@ function NavBar() {
         <div className='text-richblack-5 gap-x-1 flex'>
           {
             user && user?.accountType != "Instructor" && (
-              <Link to="/dashboard/cart" className='relative'>
+              <Link to="/dashboard/cart" className='relative  mr-3 flex items-center'>
                 <FaShoppingCart style={{ fontSize: '24px' }} />
 
                 {totalItems > 0 && (
@@ -119,7 +119,7 @@ function NavBar() {
             )
           }
           {
-            token != null && <ProfileDropDown />
+            token != null && <ProfileDropDown  />
           }
 
         </div>

@@ -7,12 +7,14 @@ import { profile_endpoints } from "../api.jsx";
 
 
 export const enrolledCourses=async(token)=>{
+    
     const toastid=toast.loading("Loading...")
     let result=[];
     try{
-        const res=await apiConnector("GET",profile_endpoints.ENROLLED_COURSES,null,{
-            Authroziation:`Bearer ${token}`,
-        })
+        const res=await apiConnector("GET",profile_endpoints.ENROLLED_COURSES,null,
+            {
+                Authorization: `Bearer ${token}`
+            })
         if(!res.data.success){
             throw new Error(res.data.message);
         }
