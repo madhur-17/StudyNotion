@@ -3,6 +3,7 @@ import { enrolledCourses } from '../../../services/operations/profileApi';
 import {useSelector} from "react-redux";
 import Spinner from "../../common/Spinner";
 import ProgressBar from "@ramonak/react-progress-bar";
+import { Link } from 'react-router-dom';
 
 function EnrolledCourses() {
     const {token}=useSelector(state=>state.auth)
@@ -33,9 +34,12 @@ function EnrolledCourses() {
                             courses.map((ele,ind)=>(
                                
                                 <div className='text-white flex flex-row py-3 px-6' key={ind}>
+                               
+                                <Link to={`/viewCourse/${ele._id}/section/${ele.courseContent[0]._id}/subSection/${ele.courseContent[0].subSection[0]._id}`}>
                                 <div>
                                 <img src={ele.thumbnail} alt='image' width={80} height={50}/>
                                 </div>
+                                </Link>
                                 <div>
                                     
                                     <p>{ele.courseName}</p>
@@ -46,6 +50,7 @@ function EnrolledCourses() {
                                 <ProgressBar completed={ele?.progress||0} customLabel='Not there Yet' height='8px'/>;
                                 </div>
                                 </div>
+                                
                             ))
                         }
                 </div>

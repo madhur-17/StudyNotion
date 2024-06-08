@@ -70,7 +70,17 @@ exports.getAllEnrolledCorses=async(req,res)=>{
     
     try{
         const userid=req.user.id;
-        const user=await User.findById(userid).populate("course").exec();
+        const user=await User.findById(userid)
+        .populate({
+            path: "course",
+            populate: {
+              path: "courseContent",
+              populate: {
+                path: "subSection",
+              },
+            },
+          })
+        .exec();
         if(!user){
             return res.json({
                 success:false,
